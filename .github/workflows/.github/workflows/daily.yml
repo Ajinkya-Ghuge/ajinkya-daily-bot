@@ -1,0 +1,23 @@
+name: 🌱 Daily Commit Bot
+
+on:
+  schedule:
+    - cron: '30 5 * * *' # Runs at 11:00 AM IST daily
+  workflow_dispatch:
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Make a change
+        run: |
+          echo " Log - $(date)" >> log.txt
+          git config --global user.name "Ajinkya AutoBot"
+          git config --global user.email "ajinkya@example.com"
+          git add .
+          git commit -m "Daily update: $(date)"
+          git push
